@@ -54,6 +54,11 @@ public class PostService {
         postEntity.changePostEntity(postUpdateRequestDto.getTitle(), postUpdateRequestDto.getWriter(), postUpdateRequestDto.getContents());
         postRepository.save(postEntity);
     }
+
+    @Transactional
+    public void delete(Long postId) {
+        postRepository.deleteById(postId);
+    }
 }
 
 
