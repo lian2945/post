@@ -1,9 +1,7 @@
 package post.post.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
@@ -21,5 +19,12 @@ public class PostEntity {
 
     @Column(name = "contents", nullable = false)
     private String contents;
+
+    @Builder(builderMethodName = "saveBuilder")
+    public PostEntity(String title, String writer, String contents) {
+        this.title = title;
+        this.writer = writer;
+        this.contents = contents;
+    }
 }
 

@@ -7,6 +7,6 @@ import lombok.Getter;
 @Builder
 public class PostRequestDto {
     private String title;
-    private String content;
+    private String contents;
     private String writer;
 }

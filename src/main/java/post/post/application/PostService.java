@@ -2,11 +2,12 @@ package post.post.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import post.post.domain.entity.PostEntity;
 import post.post.domain.repository.PostRepository;
+import post.post.presentation.dto.req.PostRequestDto;
 import post.post.presentation.dto.res.PostResponseDto;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,4 +37,16 @@ public class PostService {
                 .build());
         return postResponseDto;
     }
+
+    @Transactional
+    public void save(PostRequestDto postRequestDto) {
+        postRepository.save(PostEntity.saveBuilder()
+                        .title(postRequestDto.getTitle())
+                        .contents(postRequestDto.getContents())
+                        .writer(postRequestDto.getWriter())
+                .build());
+    }
 }
+
+
+
