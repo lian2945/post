@@ -3,7 +3,8 @@ package post.post.presentation.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import post.post.application.PostService;
-import post.post.presentation.dto.req.PostRequestDto;
+import post.post.presentation.dto.req.PostAddRequestDto;
+import post.post.presentation.dto.req.PostUpdateRequestDto;
 import post.post.presentation.dto.res.PostResponseDto;
 
 import java.util.List;
@@ -27,7 +28,12 @@ public class PostController {
     }
 
     @PostMapping("/")
-    public void addPost(@RequestBody PostRequestDto postRequestDto) {
-        postService.save(postRequestDto);
+    public void addPost(@RequestBody PostAddRequestDto postAddRequestDto) {
+        postService.save(postAddRequestDto);
+    }
+
+    @PatchMapping("/")
+    public void updatePost(@RequestBody PostUpdateRequestDto postUpdateRequestDto) {
+        postService.update(postUpdateRequestDto);
     }
 }

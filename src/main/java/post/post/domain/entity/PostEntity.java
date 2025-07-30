@@ -26,5 +26,11 @@ public class PostEntity {
         this.writer = writer;
         this.contents = contents;
     }
+
+    public void changePostEntity(String title, String writer, String contents) {
+        this.title = title;
+        this.writer = writer;
+        this.contents = contents;
+    }
 }
 

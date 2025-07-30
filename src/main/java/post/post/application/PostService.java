@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import post.post.domain.entity.PostEntity;
 import post.post.domain.repository.PostRepository;
-import post.post.presentation.dto.req.PostRequestDto;
+import post.post.presentation.dto.req.PostAddRequestDto;
+import post.post.presentation.dto.req.PostUpdateRequestDto;
 import post.post.presentation.dto.res.PostResponseDto;
 
 import java.util.List;
@@ -39,12 +40,19 @@ public class PostService {
     }
 
     @Transactional
-    public void save(PostRequestDto postRequestDto) {
+    public void save(PostAddRequestDto postAddRequestDto) {
         postRepository.save(PostEntity.saveBuilder()
-                        .title(postRequestDto.getTitle())
-                        .contents(postRequestDto.getContents())
-                        .writer(postRequestDto.getWriter())
+                        .title(postAddRequestDto.getTitle())
+                        .contents(postAddRequestDto.getContents())
+                        .writer(postAddRequestDto.getWriter())
                 .build());
+    }
+
+    @Transactional
+    public void update(PostUpdateRequestDto postUpdateRequestDto) {
+        PostEntity postEntity = postRepository.findById(postUpdateRequestDto.getId()).orElseThrow(IllegalArgumentException::new);
+        postEntity.changePostEntity(postUpdateRequestDto.getTitle(), postUpdateRequestDto.getWriter(), postUpdateRequestDto.getContents());
+        postRepository.save(postEntity);
     }
 }
 
