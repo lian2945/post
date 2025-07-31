@@ -1,4 +1,4 @@
-package post.post.domain.entity;
+package post.post.domain.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

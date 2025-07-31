@@ -1,16 +1,15 @@
-package post.post.application;
+package post.post.domain.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import post.post.domain.entity.PostEntity;
-import post.post.domain.repository.PostRepository;
-import post.post.presentation.dto.req.PostAddRequestDto;
-import post.post.presentation.dto.req.PostUpdateRequestDto;
-import post.post.presentation.dto.res.PostResponseDto;
+import post.post.domain.domain.entity.PostEntity;
+import post.post.domain.domain.repository.PostRepository;
+import post.post.domain.presentation.dto.req.PostAddRequestDto;
+import post.post.domain.presentation.dto.req.PostUpdateRequestDto;
+import post.post.domain.presentation.dto.res.PostResponseDto;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,15 +27,13 @@ public class PostService {
         ).toList();
     }
 
-    public Optional<PostResponseDto> getPostById(Long postId) {
-        Optional<PostEntity> post = postRepository.findById(postId);
-        Optional<PostResponseDto> postResponseDto;
-        postResponseDto = post.map(postEntity -> PostResponseDto.builder()
-                .title(postEntity.getTitle())
-                .writer(postEntity.getWriter())
-                .contents(postEntity.getContents())
-                .build());
-        return postResponseDto;
+    public PostResponseDto getPostById(Long postId) {
+        PostEntity post = postRepository.findById(postId).orElseThrow(IllegalArgumentException::new);
+        return PostResponseDto.builder()
+                .title(post.getTitle())
+                .writer(post.getWriter())
+                .contents(post.getContents())
+                .build();
     }
 
     @Transactional

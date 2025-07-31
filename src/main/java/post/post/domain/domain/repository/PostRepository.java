@@ -1,9 +1,9 @@
-package post.post.domain.repository;
+package post.post.domain.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import post.post.domain.entity.PostEntity;
+import post.post.domain.domain.entity.PostEntity;
 
 import java.util.List;
 

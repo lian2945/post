@@ -1,11 +1,12 @@
-package post.post.presentation.controller;
+package post.post.domain.presentation.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import post.post.application.PostService;
-import post.post.presentation.dto.req.PostAddRequestDto;
-import post.post.presentation.dto.req.PostUpdateRequestDto;
-import post.post.presentation.dto.res.PostResponseDto;
+import post.post.domain.application.PostService;
+import post.post.domain.presentation.dto.req.PostAddRequestDto;
+import post.post.domain.presentation.dto.req.PostUpdateRequestDto;
+import post.post.domain.presentation.dto.res.PostResponseDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,17 +24,17 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public Optional<PostResponseDto> getPost(@PathVariable Long postId) {
+    public PostResponseDto getPost(@PathVariable Long postId) {
         return postService.getPostById(postId);
     }
 
     @PostMapping("/")
-    public void addPost(@RequestBody PostAddRequestDto postAddRequestDto) {
+    public void addPost(@RequestBody @Valid PostAddRequestDto postAddRequestDto) {
         postService.save(postAddRequestDto);
     }
 
     @PatchMapping("/")
-    public void updatePost(@RequestBody PostUpdateRequestDto postUpdateRequestDto) {
+    public void updatePost(@RequestBody @Valid PostUpdateRequestDto postUpdateRequestDto) {
         postService.update(postUpdateRequestDto);
     }
 
